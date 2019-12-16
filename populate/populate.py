@@ -1,7 +1,6 @@
 from cloudant.client import CouchDB
 from cloudant.error import CloudantException
 from cloudant.result import Result, ResultByKey
-from urllib.parse import urlparse
 import sys
 
 host = str(sys.argv[1])

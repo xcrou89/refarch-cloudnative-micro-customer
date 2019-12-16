@@ -20,6 +20,7 @@ jobs:
         - customerHttpPort=9084
         - customerHttpsPort=9445        
         - CDB_PORT=5984
+        - POPULATE_IMAGE=ibmcase/populate
       before_script:
       # Pull the CouchDB Docker image
       - docker pull couchdb:2.1.2
@@ -33,8 +34,8 @@ jobs:
       - export GATEWAY=$(docker network inspect bridge | jq '.[].IPAM.Config' | jq '.[].Gateway' | sed 's/"//g')
       # Create the populate image
       - cd populate/
-      - docker build -t populate .
-      - docker run populate $GATEWAY $CDB_PORT
+      - docker build -t $POPULATE_IMAGE .
+      - docker run $POPULATE_IMAGE $GATEWAY $CDB_PORT
       # Verify local DB population
       - chmod +x ./test_populate.sh
       - sudo ./test_populate.sh
@@ -68,6 +69,7 @@ jobs:
       - RELEASE_NAME=customer
       - IMAGE_NAME=customer
       - IMAGE_TAG=travis
+      - POPULATE_IMAGE=ibmcase/populate
       install:
       - true
       before_script:
@@ -93,7 +95,7 @@ jobs:
       - docker build -t $IMAGE_NAME:$IMAGE_TAG .
       # Create the populate image
       - cd populate/
-      - docker build -t populate . # <-- Temporary solution until populate image is updated. Or maybe we keep.
+      - docker build -t $POPULATE_IMAGE . # <-- Temporary solution until populate image is updated. Or maybe we keep.
       - cd -
       # Install Customer <-- Reminder to update the load_data.yaml to point to agreed populate image later
       - helm dependency update ./chart/customer
