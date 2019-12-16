@@ -73,8 +73,10 @@ spec:
           - name: auth_health
             value: "https://auth-{{ .Values.service.auth }}:9443/health"
         {{ end }}
-          - name: host
-            value: "{{ .Values.service.dbService }}"
+          - name: COUCHDB_HOST
+            value: "{{ .Release.Name }}-{{ .Values.couchdb.hostSuffix }}"
+          - name: COUCHDB_PORT
+            value: "{{ .Values.couchdb.port }}"
           - name: PORT
             value: "{{ .Values.service.servicePort }}"
           - name: RELEASE_NAME
