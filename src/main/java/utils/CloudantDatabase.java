@@ -19,17 +19,17 @@ private Database cloudant;
     Config config = ConfigProvider.getConfig();
 
     private String protocol = config.getValue("protocol", String.class);
-    private String host = config.getValue("host", String.class);
-    private String port = config.getValue("port", String.class);
+    private String couchdbHost = config.getValue("COUCHDB_HOST", String.class);
+    private String couchdbPort = config.getValue("COUCHDB_PORT", String.class);
     private String database = config.getValue("database", String.class);
 	
 	private void setDatabase() throws MalformedURLException {
         
         try {
               
-        	System.out.println("Connecting to cloudant at: " + protocol + "://" + host + ":" + port);
+        	System.out.println("Connecting to cloudant at: " + protocol + "://" + couchdbHost + ":" + couchdbPort);
                     
-            final CloudantClient cloudantClient = ClientBuilder.url(new URL(protocol + "://" + host + ":" + port))
+            final CloudantClient cloudantClient = ClientBuilder.url(new URL(protocol + "://" + couchdbHost + ":" + couchdbPort))
                             .build();
             
             cloudant = cloudantClient.database(database, true);

@@ -1,13 +1,13 @@
 # CouchDB
 protocol=http
-host=localhost
-port=5984
+COUCHDB_HOST=localhost
+COUCHDB_PORT=5984
 
 user=admin
 password=passw0rd
 
 database=customers
-application.rest.client.CouchDBClientService/mp-rest/url=http://localhost:5984
+# application.rest.client.CouchDBClientService/mp-rest/url=http://localhost:5984
 
 #Auth
 auth_health=https://localhost:9443/health

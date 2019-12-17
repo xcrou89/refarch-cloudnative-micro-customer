@@ -6,10 +6,11 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.net.ssl.HttpsURLConnection;
 
 import org.eclipse.microprofile.config.Config;
-import org.eclipse.microprofile.config.ConfigProvider;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.eclipse.microprofile.health.Health;
 import org.eclipse.microprofile.health.HealthCheck;
 import org.eclipse.microprofile.health.HealthCheckResponse;
@@ -18,11 +19,16 @@ import org.eclipse.microprofile.health.HealthCheckResponse;
 @ApplicationScoped
 
 public class HealthEndpoint implements HealthCheck {
-	
-	private Config config = ConfigProvider.getConfig();  
-	private String auth_url = config.getValue("auth_health", String.class);
-    private String CouchDB_url = config.getValue("application.rest.client.CouchDBClientService/mp-rest/url", String.class);
-    		
+
+	@Inject
+	Config config;
+
+	@ConfigProperty(name="auth_health")
+	private String auth_url;
+
+	@ConfigProperty(name="application.rest.client.CouchDBClientService/mp-rest/url")
+    private String CouchDB_url;
+
 	@Override
 	public HealthCheckResponse call() {
 		// TODO Auto-generated method stub
@@ -45,6 +51,7 @@ public class HealthEndpoint implements HealthCheck {
 		// Checking if the CouchDB database is UP
 		URL url;
 		try {
+			System.out.println("CouchDB URL: " + CouchDB_url);
 			url = new URL(CouchDB_url); 
 			HttpURLConnection con = (HttpURLConnection)url.openConnection();
 			if(con!=null){
@@ -69,6 +76,7 @@ public class HealthEndpoint implements HealthCheck {
 		// Checking if the Auth service is UP
 		URL url;
 		try {
+			System.out.println("AUTH_URL: " + auth_url );
 			url = new URL(auth_url); 
 			HttpsURLConnection con = (HttpsURLConnection)url.openConnection();
 			if(con!=null){

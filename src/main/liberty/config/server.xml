@@ -25,6 +25,9 @@
     issuer="${env.jwksIssuer}">
   </mpJwt>
 
+  <!-- for mpConfig / mpRestClient -->
+  <variable name="application.rest.client.CouchDBClientService/mp-rest/url" value="http://${COUCHDB_HOST}:${COUCHDB_PORT}"/>
+
   <!--Credentials necessary to authorize user-->
   <administrator-role>
     <user-access-id>${env.administratorRealm}</user-access-id>
