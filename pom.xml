@@ -24,7 +24,7 @@
         <packaging.type>usr</packaging.type>
         <groupId.liberty-runtime>com.ibm.websphere.appserver.runtime</groupId.liberty-runtime>
         <artifactId.liberty-runtime>wlp-webProfile8</artifactId.liberty-runtime>
-        <version.liberty-runtime>18.0.0.4</version.liberty-runtime>
+        <version.liberty-runtime>19.0.0.9</version.liberty-runtime>
     </properties>
 
     <dependencies>
@@ -79,12 +79,12 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.7.5</version>
+            <version>1.7.30</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
-            <version>1.7.5</version>
+            <version>1.7.30</version>
         </dependency>
         <dependency>
             <groupId>org.apache.cxf</groupId>
@@ -179,7 +179,7 @@
                     <features>
                         <acceptLicense>true</acceptLicense>
                     </features>
-                    <looseApplication>false</looseApplication>
+                    <looseApplication>true</looseApplication>
                 </configuration>
                 <executions>
                     <execution>
@@ -220,25 +220,6 @@
                         <phase>post-integration-test</phase>
                         <goals>
                             <goal>test-stop-server</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>com.googlecode.maven-download-plugin</groupId>
-                <artifactId>download-maven-plugin</artifactId>
-                <version>1.4.0</version>
-                <configuration>
-                    <url>https://repo1.maven.org/maven2/net/wasdev/wlp/tracer/liberty-opentracing-zipkintracer/1.0/liberty-opentracing-zipkintracer-1.0-sample.zip</url>
-                    <unpack>true</unpack>
-                    <outputDirectory>${project.build.directory}/liberty/wlp/usr</outputDirectory>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>install-tracer</id>
-                        <phase>prepare-package</phase>
-                        <goals>
-                            <goal>wget</goal>
                         </goals>
                     </execution>
                 </executions>
