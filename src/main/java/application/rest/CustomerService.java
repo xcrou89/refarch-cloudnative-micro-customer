@@ -81,8 +81,7 @@ public class CustomerService {
     @Counted(name="Customer",
             absolute = true,
             displayName="Customer Call count",
-            description="Number of times the Customer call happened.",
-            monotonic=true)
+            description="Number of times the Customer call happened.")
     @Metered(name="CustomerMeter",
             displayName="Customer Call Frequency",
             description="Rate of the calls made to CouchDB")
