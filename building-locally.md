@@ -149,7 +149,7 @@ We must set the Zipkin host and port to defaults to suppress some missing config
 
 3. Start your server.
 ```
-mvn liberty:start-server -DtestServerHttpPort=9084 -DtestServerHttpsPort=9445
+mvn liberty:start -DtestServerHttpPort=9084 -DtestServerHttpsPort=9445
 ```
 You will see something similar to the below messages.
 
