@@ -21,7 +21,7 @@ public class HealthEndpoint implements HealthCheck {
 
 	private Config config = ConfigProvider.getConfig();
 	private String auth_url = config.getValue("auth_health", String.class);
-	private String CouchDB_url = config.getValue("application.rest.client.CouchDBClientService/mp-rest/url", String.class);
+	private String CouchDB_url = "http://" + System.getProperty("couchdb.host") + ":" + System.getProperty("couchdb.port");
 
 	@Override
 	public HealthCheckResponse call() {

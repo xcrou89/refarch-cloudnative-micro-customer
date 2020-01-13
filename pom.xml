@@ -19,6 +19,8 @@
         <app.name>customer</app.name>
         <testServerHttpPort>9080</testServerHttpPort>
         <testServerHttpsPort>9443</testServerHttpsPort>
+        <couchdbHost>${COUCHDB_HOST}</couchdbHost>
+        <couchdbPort>${COUCHDB_PORT}</couchdbPort> 
         <warContext>${app.name}</warContext>
         <package.name>${project.artifactId}-${project.version}</package.name>
         <package.type>zip</package.type>
@@ -182,6 +184,8 @@
                         <app.location>${project.artifactId}-${project.version}.war</app.location>
                         <default.http.port>${testServerHttpPort}</default.http.port>
                         <default.https.port>${testServerHttpsPort}</default.https.port>
+                        <couchdb.host>${couchdbHost}</couchdb.host>
+                        <couchdb.port>${couchdbPort}</couchdb.port>
                     </bootstrapProperties>
                     <features>
                         <acceptLicense>true</acceptLicense>

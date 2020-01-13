@@ -21,9 +21,11 @@ jobs:
         - customerHttpsPort=9445        
         - CDB_PORT=5984
         - POPULATE_IMAGE=ibmcase/populate
+        - COUCHDB_HOST=localhost
+        - COUCHDB_PORT=5984
       before_script:
       # Pull the CouchDB Docker image
-      - docker pull couchdb:2.1.2
+      - docker pull couchdb:2.3.1
       # Setup and run CouchDB
       - docker run -p ${CDB_PORT}:5984 -e COUCHDB_USER=admin -e COUCHDB_PASSWORD=passw0rd -d couchdb --hostname cloudant.dev
       # Wait for CouchDB to Start
@@ -49,8 +51,8 @@ jobs:
       - mv microprofile-config.properties.local microprofile-config.properties # Make main
       - cd -
       # Create Auth, put keystore in, and start it
-      - docker pull ibmcase/auth-mp:v3.0.0
-      - docker create --name auth -p 9443:9443 -p 9080:9080 ibmcase/auth-mp:v3.0.0
+      - docker pull ibmcase/auth-mp:v4.0.0
+      - docker create --name auth -p 9443:9443 -p 9080:9080 ibmcase/auth-mp:v4.0.0
       - docker cp keystorevol auth:/etc/
       - docker start auth
       script:
